@@ -1,0 +1,24 @@
+{% extends "./base.html" %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block page_header %} 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:exam_scheduling' %}"> ساخت و ویرایش برنامه زمانی برای امتحانات (ویژه معلمان) </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> ساخت برنامه زمانی برای امتحان </li>
+        </ol>
+    </nav>
+    <h2>ساخت برنامه زمانی برای امتحان</h2>
+{% endblock page_header %}
+
+{% block content %}
+    <form action="{% url 'quiz_app:exam_schedulingn' %}" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {{ form.media }}
+        <button name="submit" class="btn btn-outline-success">ثبت برنامه زمانی</button> 
+    </form>
+
+{% endblock content %}

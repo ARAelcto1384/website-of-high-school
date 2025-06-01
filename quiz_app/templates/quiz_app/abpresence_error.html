@@ -1,0 +1,15 @@
+{% extends "./base.html" %}
+
+{% block page_header %} 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> حضورغیاب </li>
+        </ol>
+    </nav>
+    <h2>تکمیل فرم مجدد!</h2>
+{% endblock page_header %}
+
+{% block content %}
+    <h5 style="text-align: center; background-color: #e7e7e7; border: 3px solid orange; color: red; padding: 50px; border-radius: 10px;">شما قبلا این فرم را تکمیل کرده اید و امکان تکمیل مجدد فرم وجود ندارد.</h5>
+{% endblock content %}

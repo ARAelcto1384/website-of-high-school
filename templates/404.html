@@ -1,0 +1,12 @@
+{% extends "quiz_app/base.html" %}
+
+{% block page_header %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> ارور 404 </li>
+        </ol>
+    </nav>
+    <h2>موردی که درخواست کردید وجود ندارد. (404)</h2>
+
+{% endblock page_header %}

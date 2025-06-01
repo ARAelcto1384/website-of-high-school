@@ -1,0 +1,278 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block page_header %}
+
+	{% if not_allowed == True %}
+		<style>
+			#not-allowed {
+				text-decoration: none;
+				pointer-events: none;
+			}
+		</style>
+		<div class="alert alert-warning" role="alert">
+		  به دلیل برگزاری آزمون در سایت قسمت اخبار بسته می باشد. باتشکر
+		</div>
+	{% endif %}
+
+    <div class="row">
+        <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+            <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                <a href="{% url 'quiz_app:azmon' %}">
+                    <img alt="آزمون" src="{% static 'quiz_app/azmon.png' %}" title="آزمون" style="max-width: 100%; height: auto;">
+                </a>
+            </div>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+            <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                <a href="{% url 'quiz_app:pasokhat' %}">
+                    <img alt="کارنامه" src="{% static 'quiz_app/pasokhat.png' %}" title="کارنامه" style="max-width: 100%; height: auto;">
+                </a>
+            </div>
+        </div>
+        {% for i in user.groups.all %}
+            {% if user.is_superuser and i.name == 'معلمان' or i.name == 'مدیریت و معاونت' or i.name == 'پشتیبان' %}
+                <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+                    <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                        <a href="{% url 'quiz_app:class_selection' %}">
+                            <img alt="کارنامه های دانش آموزان (ویژه معلمان)" src="{% static 'quiz_app/repord_card.png' %}" title="کارنامه های دانش آموزان (ویژه معلمان)" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+                    <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                        <a href="{% url 'quiz_app:question' %}">
+                            <img alt="بانک سوال (ویژه معلمان)" src="{% static 'quiz_app/soal.png' %}" title="بانک سوال (ویژه معلمان)" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+                    <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                        <a href="{% url 'quiz_app:exam_scheduling' %}">
+                            <img alt=" ساخت و ویرایش برنامه زمانی برای امتحانات (ویژه معلمان)" src="{% static 'quiz_app/exam_scheduling.png' %}" title=" ساخت و ویرایش برنامه زمانی برای امتحانات (ویژه معلمان)" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+                    <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                        <a href="{% url 'quiz_app:moallem' %}">
+                            <img alt="تصحیح آزمون (ویژه معلمان)" src="{% static 'quiz_app/moallem.png' %}" title="تصحیح آزمون (ویژه معلمان)" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        {% for i in user.groups.all %}
+            {% if user.is_staff and i.name == 'مدیر گروه های مجازی' or i.name == 'مدیریت و معاونت' or i.name == 'پشتیبان' %}
+                <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+                    <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                        <a href="{% url 'quiz_app:mabpresence' %}">
+                            <img alt="ساخت حضورغیاب (ویژه مدیران گروه های مجازی)" src="{% static 'quiz_app/mabpresence.png' %}" title="ساخت حضورغیاب (ویژه مدیران گروه های مجازی)" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+                    <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                        <a href="{% url 'quiz_app:absences' %}">
+                            <img alt="اسامی حاضرین (ویژه مدیران گروه های مجازی)" src="{% static 'quiz_app/absence.png' %}" title="اسامی حاضرین (ویژه مدیران گروه های مجازی)" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+                    <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                        <a href="{% url 'quiz_app:news' %}">
+                            <img alt="ساخت و ویرایش اخبار" src="{% static 'quiz_app/news.png' %}" title="ساخت و ویرایش اخبار" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+            <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                <a href="{% url 'quiz_app:educational' %}" id="not-allowed">
+                    <img alt="اخبار آموزشی" src="{% static 'quiz_app/educational.png' %}" title="اخبار آموزشی" style="max-width: 100%; height: auto;">
+                </a>
+            </div>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+            <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                <a href="{% url 'quiz_app:Breeding' %}" id="not-allowed">
+                    <img alt="اخبار پرورشی" src="{% static 'quiz_app/Breeding.png' %}" title="اخبار پرورشی" style="max-width: 100%; height: auto;">
+                </a>
+            </div>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+            <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                <a href="{% url 'quiz_app:criticize' %}">
+                    <img alt="انتقادات و پیشنهادات" src="{% static 'quiz_app/criticize.png' %}" title="انتقادات و پیشنهادات" style="max-width: 100%; height: auto;">
+                </a>
+            </div>
+        </div>
+        {% for i in user.groups.all %}
+            {% if user.is_superuser and i.name == 'مدیریت و معاونت' or i.name == 'پشتیبان' %}
+                <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+                    <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                        <a href="{% url 'quiz_app:mcriticize' %}">
+                            <img alt="مشاهده انتقادات و پیشنهادات (ویژه پشتیبان سایت و مدیریت و معاونت مدرسه)" src="{% static 'quiz_app/mcriticize.png' %}" title="مشاهده انتقادات و پیشنهادات (ویژه پشتیبان سایت و مدیریت و معاونت مدرسه)" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div>
+                </div>
+				<div class="col-6 col-sm-4 col-lg-2 col-md-3">
+                    <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                        <a href="{% url 'quiz_app:list_of_users' %}">
+                            <img alt="لیست کاربران (ویژه پشتیبان سایت و مدیریت و معاونت مدرسه)" src="{% static 'quiz_app/list_of _users.png' %}" title="لیست کاربران (ویژه پشتیبان سایت و مدیریت و معاونت مدرسه)" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div>
+                </div>
+				<div class="col-6 col-sm-4 col-lg-2 col-md-3">
+                    <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                        <a href="{% url 'quiz_app:class' %}">
+                            <img alt="ساخت و ویرایش کلاس (ویژه پشتیبان سایت و مدیریت و معاونت مدرسه)" src="{% static 'quiz_app/Class.png' %}" title="ساخت و ویرایش کلاس (ویژه پشتیبان سایت و مدیریت و معاونت مدرسه)" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div>
+                </div>
+				<div class="col-6 col-sm-4 col-lg-2 col-md-3">
+                    <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                        <a href="{% url 'users:register' %}">
+                            <img alt="ثبت نام دانش آموزان (ویژه پشتیبان سایت و مدیریت و معاونت مدرسه)" src="{% static 'quiz_app/register.png' %}" title="ثبت نام دانش آموزان (ویژه پشتیبان سایت و مدیریت و معاونت مدرسه)" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="col-6 col-sm-4 col-lg-2 col-md-3">
+            <div style="padding-left: 6px; padding-right: 6px; margin-bottom: 12px; text-align: center; border: 1px solid white; border-radius: 10px; background-color: white">
+                <a href="{% url 'quiz_app:contact_us' %}">
+                    <img alt="تماس با ما" src="{% static 'quiz_app/contact_us.png' %}" title="تماس با ما" style="max-width: 100%; height: auto;">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {% if news and new1 %}
+        <div style="margin-top: 10px" id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="{{news.id}}"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                <a href="{{new1.image.url}}">
+                    <img src="{{new1.image.url}}" height="350px" class="d-block w-100" alt="{{new1.name}}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{new1.name}}</h5>
+                        <p>{{new1.description}}</p>
+                    </div>
+                </a>
+                
+                </div>
+                <div class="carousel-item">
+                    <a href="{{news.image.url}}">
+                    <img src="{{news.image.url}}" height="350px" class="d-block w-100" alt="{{news.name}}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{news.name}}</h5>
+                        <p>{{news.description}}</p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    {% endif %}
+
+    <div style="margin: 20px; border: 3px solid black; background-color: gold">
+        <h5 style="margin: 10px">نام مدیر و معاون:</h5>
+        <ul style="margin: 10px; font-size: 20px">
+            <li>مدیر: خلیل حسنعلی</li>
+            <li>معاون: مجید کاشی</li>
+        </ul>
+    </div>
+
+    <div style="margin: 20px; border: 3px solid black; background-color: gold">
+        <h5 style="margin: 10px">نام مشاور مدرسه:</h5>
+        <ul style="margin: 10px; font-size: 20px">
+            <li>محمد نبی زاده</li>
+            <p>شماره تماس: 09132713995</p>
+        </ul>
+    </div>
+
+    <table style="background-color: gold" style="margin: 10px" class="w-100 table-teachers">
+        <tr class="table-teachers">
+            <th style="font-size:25px" class="table-teachers">اسامی دبیران</th>
+            <th style="font-size:25px" class="table-teachers">سمت</th>
+        </tr>
+        
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">علی حسومی</td>
+            <td id="dabir" class="table-teachers">دبیر الهیات</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">پیمان مظاهری</td>
+            <td id="dabir" class="table-teachers">دبیر الهیات</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">سید عبدالکریم موسوی</td>
+            <td id="dabir" class="table-teachers">دبیر الهیات</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">تقی دهاقین</td>
+            <td id="dabir" class="table-teachers">دبیر ادبیات</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">ابوالفضل عصاری</td>
+            <td id="dabir" class="table-teachers">دبیر ریاضی</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">محمد کاملی</td>
+            <td id="dabir" class="table-teachers">دبیر ریاضی</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">محمد علی احمدی</td>
+            <td id="dabir" class="table-teachers">دبیر علوم تجربی</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">یوسف زارعی فر</td>
+            <td id="dabir" class="table-teachers">دبیر علوم تجربی</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">حمید مدرسی</td>
+            <td id="dabir" class="table-teachers">دبیر زبان</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">سید احمد یاسینی</td>
+            <td id="dabir" class="table-teachers">دبیر مطالعات اجتماعی</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">مهرداد عمادی</td>
+            <td id="dabir" class="table-teachers">دبیر مطالعات اجتماعی</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">مهدی داودوندی</td>
+            <td id="dabir" class="table-teachers">دبیر کاروفناوری</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">علیرضا حیدری</td>
+            <td id="dabir" class="table-teachers">دبیر هنر</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">امیر عمادی</td>
+            <td id="dabir" class="table-teachers">دبیر تفکروسبک زندگی</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">یاسین اصلانی</td>
+            <td id="dabir" class="table-teachers">دبیر تربیت بدنی</td>
+        </tr>
+        <tr class="table-teachers">
+            <td id="dabir" class="table-teachers">مرتضی فیروزی تبار</td>
+            <td id="dabir" class="table-teachers">همیار</td>
+        </tr>
+    </table>
+
+{% endblock page_header %}

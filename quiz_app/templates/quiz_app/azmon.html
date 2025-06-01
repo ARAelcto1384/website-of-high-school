@@ -1,0 +1,38 @@
+{% extends "./base.html" %}
+
+{% block page_header %} 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> آزمون </li>
+        </ol>
+    </nav>
+    <h2 style="text-align: center">آغاز آزمون</h2>
+{% endblock page_header %}
+
+{% block content %}
+     
+    <div style="font-size: 17px" class="alert alert-info alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>راهنمایی:</strong> 
+        <ul>
+            <li>برای ورود به آزمون با نام و یاد خدا و توکل بر او روی گزینه شروع آزمون کلیک کنید</li>
+            <li>برای پاسخ به سوالات می توانید در قسمت پاسخ، جواب را وارد نمایید یا در قسمت تصویر پاسخ، تصویر پاسخ خود را بارگزاری نمایید.</li>
+            <li>صفحه را رفرش (تازه سازی) نکنید.</li>
+            <li>در صورت رفرش صفحه، سوال مورد نظر برای شما نمی آید و به سوال بعدی هدایت می شوید.</li>
+            <li>در پایان روی گزینه ثبت پاسخ و هدایت به سوال بعد کلیک کنید.</li>
+        </ul>
+    </div>
+
+    <div style="margin: 20px">
+    <strong><h5 style="margin: 10px; text-align: center">پاسخ دهنده: {{ user.get_full_name }}</h5></strong> 
+    <strong><h5 style="margin: 10px; text-align: center">تعداد سوالات: {{len}}</h5></strong> 
+    <strong><h5 style="margin: 10px; text-align: center">دبیر: {{teacher.get_full_name}}</h5></strong> 
+    <strong><h5 style="margin: 10px; text-align: center">درس: {{lesson}}</h5></strong> 
+    </div>
+
+    <div style="text-align: center; margin: 20px">
+        <a href="{% url 'quiz_app:new_pasokh' soal.id %}" style="font-size: 25px" class="btn btn-outline-primary">شروع آزمون</a>
+    </div>
+
+{% endblock content %}

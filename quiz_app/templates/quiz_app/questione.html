@@ -1,0 +1,38 @@
+{% extends "./base.html" %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block head %}
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+{% endblock head %}
+
+{% block page_header %} 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:question' %}"> بانک سوال (ویژه معلمان) </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> طرح سوال امتحانی </li>
+        </ol>
+    </nav>
+    <h2>ویرایش سوال امتحانی</h2>
+{% endblock page_header %}
+
+{% block content %}
+    <form action="{% url 'quiz_app:questione' soal.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+		<div class="row">
+			<div class="col-12">{{form.soal|as_crispy_field}}</div>
+			<div class="col-8">{{form.image|add_class:"form-control"|as_crispy_field}}</div>
+			<div class="col-4">{{form.nomreh|as_crispy_field}}</div>
+			<div class="col-4">{{form.lesson|as_crispy_field}}</div>
+			<div class="col-4">{{form.time|as_crispy_field}}</div>
+			<div class="col-4">{{form.owner|as_crispy_field}}</div>
+			{{ form.media }}
+		</div>
+        <button name="submit" class="btn btn-outline-success">ویرایش سوال</button> 
+    </form>
+
+    <a href="{% url 'quiz_app:delete' soal.id 'Question' %}" class="btn btn-outline-danger">حذف سوال</a> 
+
+{% endblock content %}

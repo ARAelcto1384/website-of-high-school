@@ -1,0 +1,34 @@
+{% extends "./base.html" %}
+
+{% block page_header %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> تماس با ما </li>
+        </ol>
+    </nav>
+    <h4 style="margin-top: 10px">تماس با ما</h4>
+{% endblock page_header %}
+
+{% block content %}
+
+    <div dir="rtl" style="color: black">
+        
+        <h6><storang>آدرس:</storang></h6>
+        <h6><storang><a href="https://goo.gl/maps/ruH5xTBbzD2e1QAj9"><adress>شهرستان خوانسار، چهارراه شهدا، دبیرستان دوره اول متوسطه  شهید شجاعی</adress></a></storang></h6>
+        <br>
+        <h6><storang>شماره تلفن مدیر (آقای حسنعلی):</storang></h6>
+        <h6 style="color: blue"><storang>09162683472</storang></h6><br>
+    
+        <h6><storang>شماره تلفن معاون (آقای کاشی):</storang></h6>
+        <h6 style="color: blue"><storang>09139722597</storang></h6><br>
+    
+        <h6><storang>شماره تلفن پشتیبان (آقای شکیبا):</storang></h6>
+        <h6 style="color: blue"><storang>09138342488</storang></h6><br>
+        
+        <h6><storang>شماره تلفن مدرسه:</storang></h6>
+        <h6 style="color: blue"><storang>03157772872</storang></h6><br>
+        
+    </div>
+
+{% endblock content %}

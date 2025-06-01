@@ -1,0 +1,19 @@
+{% extends "./base.html" %}
+
+{% block page_header %} 
+     <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> ارور تکرار مشاهده سوال </li>
+        </ol>
+    </nav>
+    <h2 style="text-align: center">سوال قبلا مشاهده شده است!</h2>
+{% endblock page_header %}
+
+{% block content %}
+    <div class="alert alert-danger" role="alert">
+    شما این سوال را قبلا مشاهده کرده اید! برای رفتن به ادامه آزمون روی <a href="{% url 'quiz_app:new_pasokh' soal %}">اینجا </a> کلیک کنید.
+    </div>
+    
+
+{% endblock content %}

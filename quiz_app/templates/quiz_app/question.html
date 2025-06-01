@@ -1,0 +1,85 @@
+{% extends "./base.html" %}
+
+{% block page_header %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> بانک سوال (ویژه معلمان) </li>
+        </ol>
+    </nav>
+    <h2 style="text-align: center">بانک سوال</h2>
+{% endblock page_header %}
+
+{% block content %}
+     
+    <div style="font-size: 17px" class="alert alert-info alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>راهنمایی:</strong> 
+        <ul>
+            <li>برای طرح سوال امتحانی روی گزینه طرح سوال امتحانی کلیک کنید.</li>
+            <li>برای ویرایش سوال امتحانی روی ویرایش کلیک کنید.</li>
+            <li>برای مشاهده کامل سوال و اطلاعات آن می توانید روی ویرایش کلیک کنید.</li>
+        </ul>
+    </div>
+
+    <div>
+        <div>
+            <a href="{% url 'quiz_app:questionn' %}" style="font-size: 15px" class="btn btn-primary">طرح سوال امتحانی</a>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered w-100 text-center" style="background-color: white;">
+                <thead>
+                    <tr>
+                        <th>سوال</th>
+                        <th>تصویر سوال</th>
+                        <th>بارم سوال</th>
+                        <th>درس</th>
+                        <th>کلاس</th>
+                        <th>زمان</th>
+                        <th>وضعیت</th>
+                        <th>ویرایش</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for soal in soalat %}
+                            <tr>
+                                <td>{{soal.soal|safe}}</td>
+                                {% if soal.image %}
+                                    <td><img src="{{ soal.image.url }}" height="100px" width="100px"></td>
+                                {% else %}
+                                    <td>----</td>
+                                {% endif %}
+                                <td>{{soal.nomreh}}</td>
+                                <td>{{soal.lesson}}</td>
+                                <td>{{soal.owner}}</td>
+                                <td>{{soal.time}} دقیقه</td>
+                                <td>
+                                    {% if soal.status == 'p' %}
+                                        انتشار
+                                    {% else %}
+                                        پیش نویس
+                                    {% endif %}
+                                </td>
+                                <td><a class="badge badge-primary" href="{% url 'quiz_app:questione' soal.id %}">ویرایش</a></td>
+                            </tr>
+                    {% empty %}
+                        <tr>
+                            <th>----</th>
+                            <th>----</th>
+                            <th>----</th>
+                            <th>----</th>
+                            <th>----</th>
+                            <th>----</th>
+                            <th>----</th>
+                            <th>----</th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+
+{% endblock content %}

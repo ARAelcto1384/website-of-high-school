@@ -1,0 +1,167 @@
+{% extends "./base.html" %}
+
+{% block head %}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+{% endblock head %}
+
+{% block page_header %} 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> نتایج آزمون </li>
+        </ol>
+    </nav>
+    <h2>نتایج آزمون</h2>
+{% endblock page_header %}
+
+{% block content %}
+        
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered w-100 text-center" style="background-color: white;">
+            <thead>
+                <tr>
+                    <th>تاریخ پاسخ</th>
+                    <th>سوال</th>
+                    <th>بارم سوال</th>
+                    <th>درس</th>
+                    <th>تصویر سوال</th>
+                    <th>پاسخ</th>
+                    <th>تصویر پاسخ</th>
+                    <th>نمره پاسخ</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pasokh in pasokhat %}
+                        <tr>
+                            <td>{{ pasokh.date_added }}</td>
+                            <td>{{ pasokh.soal|safe }}</td>
+                            <td>{{ pasokh.soal.nomreh }}</td>
+                            <td>{{ pasokh.soal.lesson }}</td>
+                            {% if pasokh.soal.image %}
+                                <td>
+                                    <a href="{{ pasokh.soal.image.url }}">
+                                        <img src="{{ pasokh.soal.image.url }}" class="d-block w-100 h-100">
+                                    </a>
+                                </td>
+                            {% else %}
+                                <td>----</td>
+                            {% endif %}
+                            {% if pasokh.pasokh %}
+                                <td>{{ pasokh.pasokh|safe }}</td>
+                            {% else %}
+                                <td>----</td>
+                            {% endif %}
+                            {% if pasokh.image %}
+                                <td>
+                                    <a href="{{ pasokh.image.url }}">
+                                        <img src="{{ pasokh.image.url }}" alt="{{ pasokh.soal }}" title="{{ pasokh.soal }}" class="d-block w-100 h-100">
+                                    </a>
+                                </td>
+                            {% else %}
+                                <td>----</td>
+                            {% endif %}
+                            <td>
+                                {% if pasokh.nomreh %}
+                                    {{ pasokh.nomreh }}
+                                {% elif pasokh.nomreh == 0.0 %}
+                                    0.0
+                                {% else %}
+                                معلم نمره ای
+                                <br>
+                                ثبت نکرده است!
+                                {% endif %}
+                            </td>
+                        </tr>
+                {% empty %}
+                    <tr>
+                        <th>----</th>
+                        <th>----</th>
+                        <th>----</th>
+                        <th>----</th>
+                        <th>----</th>
+                        <th>----</th>
+                        <th>----</th>
+                        <th>----</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered w-100 text-center" style="background-color: white;">
+            <thead>
+                <tr>
+                    <th>تعداد پاسخ ها</th>
+                    <th>پاسخ های صحیح</th>
+                    <th>پاسخ های غلط</th>
+                    <th>بی پاسخ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ e }}</td>
+                    <td>{{ a }}</td>
+                    <td>{{ c }}</td>
+                    <td>{{ d }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <figure class="highcharts-figure">
+        <div id="container"></div>
+    </figure>
+
+    <script>
+        Highcharts.chart('container', {
+          chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+          },
+          title: {
+            text: 'بررسی نمرات آزمون'
+          },
+          tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          accessibility: {
+            point: {
+              valueSuffix: '%'
+            }
+          },
+          plotOptions: {
+            pie: {
+              allowPointSelect: true,
+              cursor: 'pointer',
+              dataLabels: {
+                enabled: false
+              },
+              showInLegend: true
+            }
+          },
+          series: [{
+            name: 'درصد',
+            colorByPoint: true,
+            data: [{
+              name: 'صحیح',
+              y: {{a}},
+              sliced: true,
+              selected: true
+            }, {
+              name: 'پاسخ داده شده اما غلط',
+              y: {{c}}
+            }, {
+              name: 'بی پاسخ',
+              y: {{d}}
+            },]
+          }]
+        });
+    </script>
+
+{% endblock content %}

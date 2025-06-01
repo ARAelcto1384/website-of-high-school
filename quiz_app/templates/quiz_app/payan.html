@@ -1,0 +1,21 @@
+{% extends "./base.html" %}
+
+{% block page_header %} 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> آزمون </li>
+        </ol>
+    </nav>
+    <h2 style="text-align: center">آزمون شما به پایان رسید.</h2>
+{% endblock page_header %}
+
+{% block content %}
+     
+    <div class="alert alert-success alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong style="font-size: 25px">آزمون شما به پایان رسید!</strong> <h5>خسته نباشید! لطفا برای دیدن نتیجه آزمون خود بر روی لینک زیر کلیک کنید. برای شما بهترین ها را آرزومندیم!</h5>
+        <a style="font-size: 20px" href="{% url 'quiz_app:pasokhat' %}">نتایج آزمون</a>
+    </div>
+
+{% endblock content %}

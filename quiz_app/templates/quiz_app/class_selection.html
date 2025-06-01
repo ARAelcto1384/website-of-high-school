@@ -1,0 +1,29 @@
+{% extends "./base.html" %}
+
+{% block page_header %} 
+     <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> انتخاب کلاس دانش آموزان (ویژه معلمان) </li>
+        </ol>
+    </nav>
+    <h4>انتخاب کلاس دانش آموزان برای دریافت کارنامه</h4>
+{% endblock page_header %}
+
+{% block content %}
+
+    <form method="get" action="{% url 'quiz_app:repord_card' %}">
+        <div class="form-group">
+            <label for="class">نام کلاس را انتخاب کنید: </label>
+            <select class="form-control" name="s" id="class">
+                {% for class in classs %}
+                    <option value="{{class.name}}">{{class.name}}</option>
+                {% endfor %}
+            </select>
+            <button style="margin-top: 5px" class="btn btn-outline-success" type="submit">
+                <i class="fa fa-search fa-lg text-g2"></i>
+            </button>
+        </div>
+    </form>
+    
+{% endblock content %}

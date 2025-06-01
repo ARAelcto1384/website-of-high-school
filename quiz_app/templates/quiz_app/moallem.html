@@ -1,0 +1,64 @@
+{% extends "./base.html" %}
+
+{% block page_header %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> پاسخ ها </li>
+        </ol>
+    </nav>
+    <h2 style="text-align: center">پاسخ ها</h2>
+{% endblock page_header %}
+
+{% block content %}
+     
+    <div style="font-size: 17px" class="alert alert-info alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>راهنمایی:</strong> 
+        <ul>
+			{% if path == '/moallem/' %}
+            	<li>در این قسمت می توانید به پاسخ هایی که قبلا نمره ندادید، نمره دهید.</li>
+			{% else %}
+				<li>در این قسمت می توانید به همه پاسخ ها دسترسی داشته باشید.</li>
+			{% endif %}
+			<li>برای نمره دهی به پاسخ ها روی نمره دهی کلیک کنید تا به صفحه نمره دهی به پاسخ ها هدایت شوید.</li>
+			{% if path == '/moallem/' %}
+				<li>برای مشاهده کامل پاسخ ها روی <a href="{% url 'quiz_app:moallema' %}">اینجا</a> کلیک کنید</li>
+			{% endif %}
+        </ul>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered w-100 text-center" style="background-color: white;">
+            <thead>
+                <tr>
+                    <th>سوال</th>
+                    <th>پاسخ</th>
+                    <th>پاسخ دهنده</th>
+                    <th>تاریخ پاسخ</th>
+                    <th>نمره دهی</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pasokh in pasokhat %}
+                        <tr>
+                            <td>{{pasokh.soal|safe}}</td>
+                            <td>{{pasokh.pasokh|safe}}</td>
+                            <td>{{pasokh.owner.get_full_name}}</td>
+                            <td>{{pasokh.date_added}}</td>
+                            <td><a class="badge badge-primary" href="{% url 'quiz_app:mpasokh' pasokh.id %}">نمره دهی</a></td>
+                        </tr>
+                {% empty %}
+                    <tr>
+                        <th>----</th>
+                        <th>----</th>
+                        <th>----</th>
+                        <th>----</th>
+                        <th>----</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content %}

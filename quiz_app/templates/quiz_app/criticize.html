@@ -1,0 +1,24 @@
+{% extends "./base.html" %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block page_header %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> انتقادات و پیشنهادات </li>
+        </ol>
+    </nav>
+    <h2>انتقادات و پیشنهادات</h2>
+
+{% endblock page_header %}
+
+{% block content %}
+    <form action="{% url 'quiz_app:criticize' %}" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {{ form.media }}
+        <button name="submit" class="btn btn-outline-success">ثبت پیشنهاد</button> 
+    </form>
+
+{% endblock content %}

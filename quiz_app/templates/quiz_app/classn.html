@@ -1,0 +1,24 @@
+{% extends "./base.html" %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block page_header %} 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:class' %}"> لیست کلاس ها (ویژه مدیریت و معاونت و پشتیبان) </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> ساخت کلاس </li>
+        </ol>
+    </nav>
+    <h2>ساخت کلاس</h2>
+{% endblock page_header %}
+
+{% block content %}
+    <form action="{% url 'quiz_app:classn' %}" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {{ form.media }}
+        <button name="submit" class="btn btn-outline-success">ساخت کلاس</button> 
+    </form>
+
+{% endblock content %}

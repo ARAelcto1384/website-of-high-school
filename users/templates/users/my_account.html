@@ -1,0 +1,56 @@
+{% extends "quiz_app/base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> اطلاعات حساب کاربری </li>
+        </ol>
+    </nav>
+    <h4 style="margin-top: 10px">اطلاعات حساب کاربری</h4>
+{% endblock page_header %}
+
+{% block content %}
+
+    <div style="color: black; font-size: 17px">
+        
+        <p>نام و نام خانوادگی: <b>{% if user.get_full_name %}{{ user.get_full_name }}{% else %}{{ user.username }}{% endif %}</b></p>
+        
+        {% if user.profile.image %}
+            پروفایل: <img src="{{user.profile.image.url}}" style="width: 130px; height: 130px; border-radius: 100px; margin: 2px 5px 2px 5px;">
+        {% else %}
+            پروفایل: <img src="{% static 'quiz_app/profile.png' %}" style="width: 130px; height: 130px; border-radius: 100px; margin: 2px 5px 2px 5px;">
+        {% endif %}
+        
+        <h6 style="margin-top: 20px; margin-bottom: 20px; color: red">
+        برای تغییر تصویر پروفایل روی <a href="{% url 'users:my_accountep' %}">اینجا</a> کلیک کنید.
+        </h6>
+        <h6 style="margin-top: 20px; margin-bottom: 20px; color: red">
+        برای تغییر رمز عبور روی <a href="{% url 'users:password_change' %}">اینجا</a> کلیک کنید.
+        </h6>
+        
+        <p>کد ملی: <b>{{ user.username }}</b></p>
+        <p>نقش: <b>
+            {% for i in user.groups.all %}
+                {% if i.name == 'پشتیبان' %}
+                    {{ i.name }}
+                {% elif i.name == 'مدیریت و معاونت' %}
+                    مدیر یا معاون
+                {% elif i.name == 'مدیر گروه های مجازی' %}
+                    {{ i.name }}
+                {% elif i.name == 'معلمان' %}
+                    معلم
+                {% endif %}
+            {% empty %} 
+                دانش آموز   
+            {% endfor %}
+        </b></p>
+        {% if clas %}
+        <p>نام کلاس: <b>{{ clas.name }}</b></p>
+        {% endif %}
+        <p>آخرین ورود: <b>{{ user.last_login }}</b></p>
+        
+    </div>
+
+{% endblock content %}

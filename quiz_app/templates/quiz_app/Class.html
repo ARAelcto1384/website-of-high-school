@@ -1,0 +1,52 @@
+{% extends "./base.html" %}
+
+{% block page_header %} 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> لیست کلاس ها (ویژه مدیریت و معاونت و پشتیبان) </li>
+        </ol>
+    </nav>
+    <h2>لیست کلاس ها</h2>
+{% endblock page_header %}
+
+{% block content %}
+
+    <div style="font-size: 17px" class="alert alert-info alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>راهنمایی:</strong> 
+        <ul>
+            <li>برای ساخت کلاس روی گزینه ساخت کلاس کلیک کنید.</li>
+            <li>برای ویرایش کلاس روی ویرایش کلیک کنید.</li>
+        </ul>
+    </div>
+
+    <div style="margin-bottom: 20px">
+        <a href="{% url 'quiz_app:classn' %}" style="font-size: 15px" class="btn btn-primary">ساخت کلاس</a>
+    </div>
+
+	<div class="table-responsive">
+		<table class="table table-hover table-bordered w-100 text-center" style="background-color: white;">
+			<thead>
+				<tr>
+					<th>نام کلاس</th>
+					<th>ویرایش</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for c in Classs %}
+						<tr>
+							<td>{{c.name}}</td>
+							<td><a class="badge badge-primary" href="{% url 'quiz_app:classe' c.id %}">ویرایش</a></td>
+						</tr>
+				{% empty %}
+					<tr>
+						<th>----</th>
+						<th>----</th>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock content %}

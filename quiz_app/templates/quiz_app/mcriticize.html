@@ -1,0 +1,42 @@
+{% extends "./base.html" %}
+
+{% block page_header %} 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> مشاهده انتقادات و پیشنهادات (ویژه پشتیبان سایت و مدیریت و معاونت مدرسه) </li>
+        </ol>
+    </nav>
+    <h2>انتقادات و پیشنهادات</h2>
+{% endblock page_header %}
+
+{% block content %}
+
+	<div class="table-responsive">
+		<table class="table table-hover table-bordered text-center" style="background-color: white;">
+				<thead>
+					<tr>
+						<th scope="col">موضوع</th>
+						<th scope="col">توضیحات</th>
+						<th scope="col">حذف</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for criticize in criticizes %}
+						<tr>
+							<td>{{ criticize.name }}</td>
+							<td>{{ criticize.description|safe }}</td>
+							<td><a href="{% url 'quiz_app:delete' criticize.id 'Criticize' %}" class="badge badge-danger">حذف پیشنهاد</a></td>
+						</tr>
+					{% empty %}
+						<tr>
+							<th>----</th>
+							<td>----</td>
+							<td>----</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+		</table>
+	</div>
+
+{% endblock content %}

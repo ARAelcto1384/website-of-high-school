@@ -1,0 +1,51 @@
+{% extends "./base.html" %}
+
+{% block page_header %} 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> ساخت و ویرایش اخبار </li>
+        </ol>
+    </nav>
+    <h2>اخبار</h2>
+{% endblock page_header %}
+
+{% block content %}
+     
+    <div style="font-size: 17px" class="alert alert-info alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>راهنمایی:</strong> 
+        <ul>
+            <li>برای ساخت خبر روی گزینه ساخت خبر کلیک کنید.</li>
+            <li>برای ویرایش خبر روی هر کدام از اخبار موجود کلیک کنید.</li>
+        </ul>
+    </div>
+
+    <div style="margin-bottom: 20px">
+        <a href="{% url 'quiz_app:newsn' %}" style="font-size: 15px" class="btn btn-primary">ساخت خبر</a>
+    </div>
+
+    {% for new in news %}
+    <a href="{% url 'quiz_app:newse' new.id %}">
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                {% if new.image %}
+                    <div class="col-md-4">
+                            <img src="{{new.image.url}}" class="card-img" alt="{{new.name}}">
+                    </div>
+                {% endif %}
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{new.name}}</h5>
+                        <p class="card-text">{{new.description|safe}}</p>
+                        <p class="card-text"><small class="text-muted">{{new.date_added}}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+    {% empty %}
+        <h6>خبری یافت نشد!</h6>
+    {% endfor %}
+
+{% endblock content %}

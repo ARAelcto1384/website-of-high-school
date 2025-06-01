@@ -1,0 +1,38 @@
+{% extends "./base.html" %}
+
+{% block page_header %} 
+     <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> جستجو </li>
+        </ol>
+    </nav>
+    <h4>جستجوی واژه {{search_title}}</h4>
+{% endblock page_header %}
+
+{% block content %}
+
+    {% for new in result %}
+    <div class="card mb-3">
+        <div class="row no-gutters">
+            {% if new.image %}
+                <div class="col-md-4">
+                    <a href="{{new.image.url}}">
+                        <img src="{{new.image.url}}" class="card-img" alt="{{new.name}}">
+                    </a>
+                </div>
+            {% endif %}
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{new.name}}</h5>
+                    <p class="card-text">{{new.description|safe}}</p>
+                    <p class="card-text"><small class="text-muted">{{new.date_added}}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        <h4>خبری یافت نشد!</h4>
+    {% endfor %}
+    
+{% endblock content %}

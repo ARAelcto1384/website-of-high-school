@@ -1,0 +1,60 @@
+{% extends "./base.html" %}
+
+{% block page_header %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> حضورغیاب (ویژه مدیران گروه های مجازی) </li>
+        </ol>
+    </nav>
+    <h2 style="text-align: center">حضورغیاب ها</h2>
+{% endblock page_header %}
+
+{% block content %}
+     
+    <div style="font-size: 17px" class="alert alert-info alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>راهنمایی:</strong> 
+        <ul>
+            <li>برای ساخت حضورغیاب روی گزینه ساخت حضورغیاب کلیک کنید.</li>
+            <li>برای ویرایش حضورغیاب روی ویرایش کلیک کنید.</li>
+        </ul>
+    </div>
+
+    <div class="table-responsive">
+        <div>
+            <a href="{% url 'quiz_app:mabpresencen' %}" style="font-size: 15px" class="btn btn-primary">ساخت حضورغیاب</a>
+        </div>
+        <table class="table table-hover table-bordered w-100 text-center" style="background-color: white;">
+            <thead>
+                <tr>
+                    <th>نام کلاس</th>
+                    <th>وضعیت</th>
+                    <th>ویرایش</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in abpresence %}
+                        <tr>
+                            <td>{{a.name}}</td>
+                            {% if a.status == 'p' %}
+                                <td>انتشار</td>
+                            {% else %}
+                                <td>پیش نویس</td>
+                            {% endif %}
+                            <td><a class="badge badge-primary" href="{% url 'quiz_app:mabpresencee' a.id %}">ویرایش</a></td>
+                        </tr>
+                {% empty %}
+                    <tr>
+                        <th>----</th>
+                        <th>----</th>
+                        <th>----</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+
+
+{% endblock content %}

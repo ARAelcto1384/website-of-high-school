@@ -1,0 +1,160 @@
+{% load bootstrap4 %}
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="fa-ir">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content=" سایت دبیرستان شهید شجاعی شهرستان خوانسار، مکانی برای امتحانات مجازی، اخبار مدرسه و فیلم های آموزشی ">
+    <meta name="author" content="رضا شکیبا">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta name="title" content="دبیرستان شهید شجاعی">
+    <meta name="url" content="sh-shojaei.fandogh.cloud">
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="دبیرستان شهید شجاعی">
+    <meta property="og:description" content="سایت دبیرستان شهید شجاعی شهرستان خوانسار، مکانی برای امتحانات مجازی، اخبار مدرسه و فیلم های آموزشی">
+    <meta property="og:site_name" content="دبیرستان شهید شجاعی">
+    <meta charset="UTF-8">    
+    <title>ورود به وب سایت</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/Login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/Login/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/Login/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'users/Login/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/Login/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/Login/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'users/Login/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'users/Login/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'users/Login/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'users/Login/css/rtl.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+    
+    <div style="position: absolute; top: 10%">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#staticBackdrop" style="font-size: 25px;">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">راهنما ورود به سایت</h5>
+              </div>
+              <div class="modal-body" style="text-align: right">
+                <ul style="list-style-type: disc;">
+                    <li  style="list-style-type: disc;">کد ملی هر فرد نام کاربری ایشان در سایت دبیرستان شهید شجاعی می باشد.</li>  
+                    <li  style="list-style-type: disc;">برای ورود در صورتیکه شما با یکی از عناوین کاربران سطح مدرسه (نظیر: دانش آموز، معلم، مدیر و معاون) قصد ورود به سایت را دارید کافی است به مدیر مدرسه خود مراجعه نمایید تا دسترسی مناسب نقش شما را ایجاد نموده و به شما رمز عبور جهت ورود به سایت را تحویل دهد.</li> 
+                    <li  style="list-style-type: disc;">چناچه هنگام ورود با پیغام "لطفا نام کاربری و گذرواژه ای قابل قبول وارد کنید. توجه داشته باشید که ممکن است هر دو به کوچکی و بزرگی حروف حساس باشند." مواجه شدید، نام کاربری و رمز عبور خود را یک بار دیگر امتحان کنید و در صورت مواجه با پیغام ارور وارد لینک زیر شوید و با یکی از مسئولان سایت تماس بگیرید.
+                    <br>
+                    <a href="{% url 'quiz_app:contact_us' %}" style="font-family: Sahel; color: blue">صفحه تماس با ما</a>
+                    </li>
+                    <li  style="list-style-type: disc;">برای مشاهده بهترین عملکرد سایت از آخرین نسخه مرورگرهای google chrome و یا firefox استفاده نمایید. </li>
+                </ul>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+              </div>
+            </div>
+          </div>
+        </div>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url({% static 'users/shojaee.jpg' %});">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" action="{% url 'users:login' %}" method="post">
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                        <div class="errors">
+                            {% for error in form.non_field_errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+					<span class="login100-form-logo">
+						
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27 myfont">
+						<b>ورود</b>
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+				        <label style="color:white">نام کاربری:</label>
+                        {{form.username|add_class:"input100" }}
+                        {% if form.username.errors %}
+                            <div class="errors">
+                                {% for error in form.username.errors %}
+                                    <span class="errors">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <label style="color:white">رمز عبور:</label>
+				        {{form.password|add_class:"input100" }}
+                        {% if form.password.errors %}
+                            <div class="errors">
+                                {% for error in form.password.errors %}
+                                    <span class="errors">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button name="submit" class="login100-form-btn myfont">
+							<b>ورود</b>
+						</button>
+					</div>
+					{% if next %}
+                    	<input type="hidden" name="next" value="{{ next }}">
+					{% else %}
+						<input type="hidden" name="next" value="{% url 'quiz_app:home' %}" />
+					{% endif %}
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="{% static 'users/Login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'users/Login/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'users/Login/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'users/Login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'users/Login/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'users/Login/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'users/Login/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'users/Login/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'users/Login/js/main.js' %}"></script>
+
+</body>
+</html>

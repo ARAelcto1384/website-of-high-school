@@ -1,0 +1,22 @@
+{% extends "quiz_app/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block page_header %} 
+	<nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page">  ثبت نام دانش آموزان (ویژه مدیریت و معاونت و پشتیبان) </li>
+        </ol>
+    </nav>
+    <h2>ثبت نام دانش آموزان</h2>
+{% endblock page_header %}
+
+{% block content %} 
+
+    <form action="{% url 'users:register' %}" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button name="submit" class="btn btn-primary">ثبت نام</button> 
+    </form>
+
+{% endblock content %}

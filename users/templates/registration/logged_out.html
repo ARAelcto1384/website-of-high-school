@@ -1,0 +1,15 @@
+{% extends "quiz_app/base.html" %}
+
+{% block page_header %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> خروج </li>
+        </ol>
+    </nav>
+    <h2>خروج</h2>
+{% endblock page_header %}
+
+{% block content %} 
+    <h5>شما خارج شدید. ممنون از بازدید شما!</h5>
+{% endblock content %}

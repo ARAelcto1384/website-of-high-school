@@ -1,0 +1,68 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block page_header %} 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz_app:home' %}"> خانه </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> لیست کاربران (ویژه مدیریت و معاونت و پشتیبان) </li>
+        </ol>
+    </nav>
+    <h2>لیست کاربران</h2>
+{% endblock page_header %}
+
+{% block content %}
+
+	<div class="table-responsive">
+		<table class="table table-hover table-bordered w-100 text-center" style="background-color: white;">
+			<thead>
+				<tr>
+					<th>پروفایل</th>
+					<th>نام و نام خانوادگی</th>
+					<th>کد ملی</th>
+					<th>نقش</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+						<tr>
+							<td>
+								{% if user.profile.image %}
+									<img src="{{user.profile.image.url}}" style="width: 40px; height: 40px; border-radius: 100px; margin: 2px 5px 2px 5px;">
+								{% else %}
+									<img src="{% static 'quiz_app/profile.png' %}" style="width: 40px; height: 40px; border-radius: 100px; margin: 2px 5px 2px 5px;">
+								{% endif %}
+							</td>
+							<td>
+								{% if user.get_full_name %}{{ user.get_full_name }}{% else %}{{ user.username }}{% endif %}
+							</td>
+							<td>{{ user.username }}</td>
+							<td>
+								{% for i in user.groups.all %}
+									{% if i.name == 'پشتیبان' %}
+										{{ i.name }}
+									{% elif i.name == 'مدیریت و معاونت' %}
+										مدیر یا معاون
+									{% elif i.name == 'مدیر گروه های مجازی' %}
+										{{ i.name }}
+									{% elif i.name == 'معلمان' %}
+										معلم
+									{% endif %}
+								{% empty %} 
+									دانش آموز   
+								{% endfor %}
+							</td>
+						</tr>
+				{% empty %}
+					<tr>
+						<th>----</th>
+						<th>----</th>
+						<th>----</th>
+						<th>----</th>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock content %}
